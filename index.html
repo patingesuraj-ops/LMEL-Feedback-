@@ -1,0 +1,345 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lloyds Metals - Feedback Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("https://uploads.onecompiler.io/43vtcp42a/43vw7ay7e/GHUGUS.jpg") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      width: 700px;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 0.8s ease-in-out forwards;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo { text-align: center; margin-bottom: 15px; }
+    .logo img { width: 250px; }
+    h2 { text-align: center; margin-bottom: 20px; color: #333; }
+    h3 { margin-top: 20px; color: #222; }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    input, select, textarea, button {
+      width: 100%; padding: 10px; margin-top: 6px;
+      border: 1px solid #ccc; border-radius: 8px; font-size: 14px;
+      transition: background 0.3s, color 0.3s;
+    }
+    button {
+      background: #007bff; color: white; border: none;
+      cursor: pointer; margin-top: 15px; font-weight: bold;
+    }
+    button:hover { background: #0056b3; transform: scale(1.05); transition: all 0.3s ease; }
+    .success { color: green; font-weight: bold; text-align: center; margin-top: 15px; }
+
+    /* Table Style */
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { text-align: center; padding: 8px; border: 1px solid #ccc; }
+    th { background: #f4f4f4; }
+
+    /* Dark Mode */
+    /* ✅ Keep background image always visible */
+body.dark { color: #f1f1f1; }
+
+/* ✅ Apply dark mode only to container */
+.container.dark {
+  background: rgba(30, 30, 30, 0.95);
+  color: #f1f1f1;
+}
+
+    .container.dark { background: rgba(30, 30, 30, 0.95); color: #f1f1f1; }
+    .container.dark input,
+    .container.dark select,
+    .container.dark textarea { background: #1e1e1e; color: #f1f1f1; border: 1px solid #555; }
+    .dark h2, .dark h3 { color: #f1f1f1; }
+
+    /* Switch */
+    /*.switch { position: absolute; top: 20px; right: 20px; display: flex; align-items: center; cursor: pointer; }*/
+    /*.switch input { display: none; }*/
+    /*.slider {*/
+    /*  position: relative; width: 50px; height: 25px;*/
+    /*  background: #ccc; border-radius: 25px; transition: 0.3s;*/
+    /*}*/
+    /*.slider::before {*/
+    /*  content: ""; position: absolute; height: 20px; width: 20px;*/
+    /*  left: 3px; top: 2.5px; background: white; border-radius: 50%; transition: 0.3s;*/
+    /*}*/
+    /*input:checked + .slider { background: #007bff; }*/
+    /*input:checked + .slider::before { transform: translateX(25px); }*/
+    /*.mode-label { margin-right: 10px; font-size: 18px; transition: transform 0.5s ease; }*/
+    /*body.dark .mode-label { transform: rotate(180deg); }*/
+     .switch { position: absolute; top: 20px; right: 20px; display: flex; align-items: center; cursor: pointer; }
+    .switch input { display: none; }
+    .slider {
+      position: relative; width: 50px; height: 25px;
+      background: #ccc; border-radius: 25px; transition: 0.3s;
+    }
+    .slider::before {
+      content: ""; position: absolute; height: 20px; width: 20px;
+      left: 3px; top: 2.5px; background: white; border-radius: 50%; transition: 0.3s;
+    }
+    input:checked + .slider { background: #007bff; }
+    input:checked + .slider::before { transform: translateX(25px); }
+    .mode-label { margin-right: 10px; font-size: 18px; transition: transform 0.5s ease; }
+    body.dark .mode-label { transform: rotate(180deg); }
+
+    /* Hide canteen section initially */
+    #canteen-section table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.08); /* subtle transparent background */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#canteen-section {
+  display: none;   /* hidden by default */
+  margin-top: 20px;
+}
+
+
+#canteen-section th {
+  background: rgba(255, 255, 255, 0.15);
+  color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#canteen-section td {
+  padding: 10px;
+  text-align: center;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Alternate row shading for readability */
+#canteen-section tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Table Styling - Light Mode */
+#canteen-section table {
+  width: 100%;
+  border-collapse: collapse;
+  background: ffffff#; /* pure white */
+  border-radius: 10px;
+  overflow: hidden;
+  color: #222; /* dark gray text */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* light shadow */
+}
+
+/* Table headers */
+#canteen-section th {
+  background: #f0f0f0; /* soft gray header */
+  color: #111;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Table cells */
+#canteen-section td {
+  padding: 10px;
+  text-align: center;
+  color: #222;
+  border: 1px solid #ddd;
+}
+
+/* Alternate rows */
+#canteen-section tr:nth-child(even) {
+  background: #fafafa; /* subtle light gray */
+}
+
+
+/* 🔥 Dark mode override */
+@media (prefers-color-scheme: dark) {
+  #canteen-section table {
+    background: #2c2c2c; /* lighter dark gray */
+    color: #f5f5f5;
+    box-shadow: none;
+  }
+
+  #canteen-section th {
+    background: #3a3a3a;
+    color: #fff;
+  }
+
+  #canteen-section td {
+    color: #f5f5f5;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  #canteen-section tr:nth-child(even) {
+    background: #333333;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container" id="form-container">
+    <!-- Dark Mode Switch -->
+    <label class="switch">
+      <span class="mode-label">🌙</span>
+      <input type="checkbox" id="darkModeSwitch">
+      <span class="slider"></span>
+    </label>
+
+    <div class="logo">
+      <img src="https://uploads.onecompiler.io/43vtcp42a/43vtdayqp/lloyds-metals-logo.jpg" alt="Lloyds Metals Logo">
+    </div>
+    <h2>Employee Feedback Form</h2>
+    
+    <!-- Feedback Form -->
+    <form id="feedback-form" action="https://script.google.com/macros/s/AKfycbyQvHwJ9m3xVMyePsUxk7tmccxxSTL9POSKY4SnuJ1ELTQRqQmZvuOimryULb2_KKwM/exec" method="POST">
+<!--      <form id="feedback-form" action="https://script.google.com/macros/s/AKfycbwxq7QrsejxX2zTW5Wey9YQCplktH1VLcEvAPQ_53pZNR4wzz84lH3lUMYk-94RvO7r/exec-->
+<!--" method="POST">-->
+
+      <label>Name <span style="color:red">*</span></label>
+      <input type="text" name="Name" required>
+
+      <label>Employee ID <span style="color:red">*</span></label>
+      <input type="text" name="Employee ID" required>
+
+      <label>Contact Number <span style="color:red">*</span></label>
+      <input type="tel" name="Contact Number" pattern="[0-9]{10}" maxlength="10" required
+             oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+      <label>Email ID</label>
+      <input type="email" name="Email Id">
+
+      <label>Department</label>
+      <input type="text" name="department">
+
+      <label>Feedback Type</label>
+      <select name="type" id="feedbackType" required>
+        <option value="">Select</option>
+        <option value="Canteen">Canteen</option>
+        <option value="Plant">Plant</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <!--<label>Other</label>-->
+      <!--<input type="text" name="Other" placeholder="Other Feedback Type">-->
+
+      <!-- Canteen Section -->
+      <div id="canteen-section">
+        <h3>1. Food Quality</h3>
+        <table>
+          <tr><th>Item</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+          <tr><td>Taste of food</td><td><input type="radio" name="taste" value="1"></td><td><input type="radio" name="taste" value="2"></td><td><input type="radio" name="taste" value="3"></td><td><input type="radio" name="taste" value="4"></td><td><input type="radio" name="taste" value="5" required></td></tr>
+          <tr><td>Freshness</td><td><input type="radio" name="freshness" value="1"></td><td><input type="radio" name="freshness" value="2"></td><td><input type="radio" name="freshness" value="3"></td><td><input type="radio" name="freshness" value="4"></td><td><input type="radio" name="freshness" value="5" required></td></tr>
+          <tr><td>Temperature</td><td><input type="radio" name="temperature" value="1"></td><td><input type="radio" name="temperature" value="2"></td><td><input type="radio" name="temperature" value="3"></td><td><input type="radio" name="temperature" value="4"></td><td><input type="radio" name="temperature" value="5" required></td></tr>
+        </table>
+
+        <h3>2. Hygiene & Cleanliness</h3>
+        <table>
+          <tr><th>Item</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+          <tr><td>Serving area</td><td><input type="radio" name="serving_area" value="1"></td><td><input type="radio" name="serving_area" value="2"></td><td><input type="radio" name="serving_area" value="3"></td><td><input type="radio" name="serving_area" value="4"></td><td><input type="radio" name="serving_area" value="5" required></td></tr>
+          <tr><td>Dining area</td><td><input type="radio" name="dining_area" value="1"></td><td><input type="radio" name="dining_area" value="2"></td><td><input type="radio" name="dining_area" value="3"></td><td><input type="radio" name="dining_area" value="4"></td><td><input type="radio" name="dining_area" value="5" required></td></tr>
+          <tr><td>Staff hygiene</td><td><input type="radio" name="staff_hygiene" value="1"></td><td><input type="radio" name="staff_hygiene" value="2"></td><td><input type="radio" name="staff_hygiene" value="3"></td><td><input type="radio" name="staff_hygiene" value="4"></td><td><input type="radio" name="staff_hygiene" value="5" required></td></tr>
+        </table>
+
+        <h3>3. Service & Staff Behavior</h3>
+        <table>
+          <tr><th>Item</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+          <tr><td>Politeness</td><td><input type="radio" name="politeness" value="1"></td><td><input type="radio" name="politeness" value="2"></td><td><input type="radio" name="politeness" value="3"></td><td><input type="radio" name="politeness" value="4"></td><td><input type="radio" name="politeness" value="5" required></td></tr>
+          <tr><td>Serving speed</td><td><input type="radio" name="serving_speed" value="1"></td><td><input type="radio" name="serving_speed" value="2"></td><td><input type="radio" name="serving_speed" value="3"></td><td><input type="radio" name="serving_speed" value="4"></td><td><input type="radio" name="serving_speed" value="5" required></td></tr>
+          <tr><td>Queue management</td><td><input type="radio" name="queue_management" value="1"></td><td><input type="radio" name="queue_management" value="2"></td><td><input type="radio" name="queue_management" value="3"></td><td><input type="radio" name="queue_management" value="4"></td><td><input type="radio" name="queue_management" value="5" required></td></tr>
+        </table>
+
+        <h3>4. Facilities</h3>
+        <table>
+          <tr><th>Item</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+          <tr><td>Seating availability</td><td><input type="radio" name="seating" value="1"></td><td><input type="radio" name="seating" value="2"></td><td><input type="radio" name="seating" value="3"></td><td><input type="radio" name="seating" value="4"></td><td><input type="radio" name="seating" value="5" required></td></tr>
+          <tr><td>Ventilation</td><td><input type="radio" name="ventilation" value="1"></td><td><input type="radio" name="ventilation" value="2"></td><td><input type="radio" name="ventilation" value="3"></td><td><input type="radio" name="ventilation" value="4"></td><td><input type="radio" name="ventilation" value="5" required></td></tr>
+          <tr><td>Waste disposal</td><td><input type="radio" name="waste" value="1"></td><td><input type="radio" name="waste" value="2"></td><td><input type="radio" name="waste" value="3"></td><td><input type="radio" name="waste" value="4"></td><td><input type="radio" name="waste" value="5" required></td></tr>
+        </table>
+      </div>
+      <label>Other</label>
+      <input type="text" name="Other" placeholder="Other Feedback Type">
+
+      <label>Your Feedback</label>
+      <textarea name="feedback" rows="4" required></textarea>
+
+      <input type="hidden" name="Date" id="systemDate">
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+
+    <div id="response" class="success"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("feedback-form");
+    const responseMsg = document.getElementById("response");
+    const container = document.getElementById("form-container");
+    const darkModeSwitch = document.getElementById("darkModeSwitch");
+    const modeLabel = document.querySelector(".mode-label");
+    const feedbackType = document.getElementById("feedbackType");
+    const canteenSection = document.getElementById("canteen-section");
+
+    // Add system date
+    document.getElementById("systemDate").value = new Date().toLocaleString();
+
+    // Show/Hide Canteen Section & toggle required
+    feedbackType.addEventListener("change", () => {
+      if (feedbackType.value === "Canteen") {
+        canteenSection.style.display = "block";
+        canteenSection.querySelectorAll("input[type=radio]").forEach(r => r.required = true);
+      } else {
+        canteenSection.style.display = "none";
+        canteenSection.querySelectorAll("input[type=radio]").forEach(r => r.required = false);
+      }
+    });
+
+    // Handle Form Submit
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      fetch(form.action, { method: "POST", body: data })
+        .then(() => {
+          responseMsg.innerHTML = "✅ Feedback submitted successfully!";
+          form.reset();
+          canteenSection.style.display = "none";
+        })
+        .catch(error => {
+          responseMsg.innerHTML = "❌ Error submitting feedback.";
+          console.error("Error!", error.message);
+        });
+    });
+
+    // Dark mode toggle
+    darkModeSwitch.addEventListener("change", () => {
+      document.body.classList.toggle("dark");
+      container.classList.toggle("dark");
+      modeLabel.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    });
+  </script>
+</body>
+</html>
